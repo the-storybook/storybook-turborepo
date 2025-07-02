@@ -45,4 +45,4 @@ USER nextjs
 
 COPY --from=installer /app/apps/api/package.json .
 
-CMD [ "node", "apps/api/server.js" ]
+CMD [ "npx", "tsx", "/app/apps/api/src/main.ts" ]
