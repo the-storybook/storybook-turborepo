@@ -43,6 +43,6 @@ WORKDIR /app
 # RUN adduser --system --uid 1001 nextjs
 # USER nextjs
 
-COPY --from=installer /app/apps/api/package.json .
+COPY --from=installer /app/ .
 
 CMD [ "npx", "tsx", "/app/apps/api/src/main.ts" ]
