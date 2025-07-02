@@ -1,10 +1,10 @@
-FROM node:20-slim AS base
+FROM node:20 AS base
 
 FROM base AS builder
 WORKDIR /app
 
 RUN npm i -g pnpm@latest
-# RUN pnpm setup
+RUN pnpm setup
 RUN pnpm install -g turbo
 
 COPY . .
