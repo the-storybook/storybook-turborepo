@@ -11,7 +11,7 @@ COPY . .
 RUN turbo prune api --docker
 # Copy root package.json and lockfile
 COPY package.json ./
-COPY package-lock.json ./
+COPY pnpm-lock.json ./
 
 
 FROM base AS installer
