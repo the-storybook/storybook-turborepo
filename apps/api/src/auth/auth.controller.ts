@@ -1,10 +1,10 @@
 import { Body, Controller, Post, Res, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
-import { Cookies } from 'src/decorators/cookies.decorator';
+import { Cookies } from '../decorators/cookies.decorator';
 import { JwtService } from '@nestjs/jwt';
 import { UUID } from 'crypto';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 
 @Controller('auth')
 export class AuthController {
@@ -32,7 +32,7 @@ export class AuthController {
 
         const payload = this.jwtService.decode<{sub: UUID, email: string}>(sessionToken);
         
-        return UserService
+        return this.userService.findOne(payload.sub)
     }
     
 }

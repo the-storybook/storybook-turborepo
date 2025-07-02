@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
-import { UserModule } from 'src/user/user.module';
-import { UserService } from 'src/user/user.service';
+import { UserModule } from '../user/user.module';
 import { AuthService } from './auth.service';
-import { PasswordEncoderService } from 'src/password_encoder/password_encoder.service';
+import { PasswordEncoderService } from '../password_encoder/password_encoder.service';
 
 @Module({
   controllers: [AuthController],

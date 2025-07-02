@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PasswordEncoderService } from 'src/password_encoder/password_encoder.service';
-import { UserService } from 'src/user/user.service';
+import { PasswordEncoderService } from '../password_encoder/password_encoder.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {

@@ -5,9 +5,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { UUID } from 'crypto';
-import { PasswordEncoderService } from 'src/password_encoder/password_encoder.service';
-import { OtpService } from 'src/otp/otp.service';
-import { MailerService } from 'src/mailer/mailer.service';
+import { PasswordEncoderService } from '../password_encoder/password_encoder.service';
+import { OtpService } from '../otp/otp.service';
+import { MailerService } from '../mailer/mailer.service';
 import { ValidateOtpDto } from './dto/validate-otp.dto';
 
 @Injectable()

@@ -14,10 +14,11 @@ import { MailerService } from './mailer/mailer.service';
 import { OtpService } from './otp/otp.service';
 import { OtpModule } from './otp/otp.module';
 import { AppRedisModule } from './app_redis/app_redis.module';
+import { PasswordEncoderModule } from './password_encoder/password_encoder.module';
 
 
 @Module({
-  imports: [LinksModule, MongooseModule.forRoot(process.env.MONGODB_URL), UserModule, AuthModule, OtpModule, AppRedisModule],
+  imports: [LinksModule, MongooseModule.forRoot(process.env.MONGODB_URL), UserModule, AuthModule, OtpModule, AppRedisModule, PasswordEncoderModule],
   controllers: [AppController],
   providers: [AppService, PasswordEncoderService, AuthService, MailerService, OtpService],
 })
