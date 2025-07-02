@@ -5,9 +5,20 @@ import { LinksModule } from './links/links.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './user/user.module';
+import { PasswordEncoderService } from './password_encoder/password_encoder.service';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { MailerService } from './mailer/mailer.service';
+import { OtpService } from './otp/otp.service';
+import { OtpModule } from './otp/otp.module';
+import { AppRedisModule } from './app_redis/app_redis.module';
+
+
 @Module({
-  imports: [LinksModule],
+  imports: [LinksModule, MongooseModule.forRoot(process.env.MONGODB_URL), UserModule, AuthModule, OtpModule, AppRedisModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PasswordEncoderService, AuthService, MailerService, OtpService],
 })
 export class AppModule {}
