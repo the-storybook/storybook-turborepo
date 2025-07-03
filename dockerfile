@@ -61,6 +61,8 @@ FROM node:20-slim AS runner
 ARG APP_NAME
 
 ENV NODE_ENV="production"
+# Persist the build-time argument as a runtime environment variable
+ENV APP_NAME=${APP_NAME}
 
 WORKDIR /app
 
@@ -72,9 +74,6 @@ USER nextjs
 # Copy the built application and its dependencies from the builder stage
 COPY --from=builder --chown=nextjs:nodejs /app/ .
 
-# Set the command to start the application
-CMD if [ "$APP_NAME" = "api" ]; then \
-      node apps/api/dist/main; \
-    else \
-      next start apps/web; \
-    fi
+# Set the command to start the application, using the APP_NAME env var
+# to decide which application to start.
+CMD sh -c "if [ \"$APP_NAME\" = \"api\" ]; then node apps/api/dist/main; else node_modules/.bin/next start apps/web; fi"
