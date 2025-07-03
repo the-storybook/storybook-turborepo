@@ -10,7 +10,7 @@ WORKDIR /app
 RUN npm i -g pnpm@latest
 RUN pnpm setup
 RUN pnpm install -g turbo
-
+RUN pnpm install dotenv-cli --ignore-workspace-root-check
 
 # COPY --from=builder /app/out/full/ .
 # COPY turbo.json turbo.json
