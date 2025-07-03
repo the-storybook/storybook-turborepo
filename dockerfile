@@ -60,12 +60,19 @@ RUN pnpm turbo build --filter=${APP_NAME}
 FROM node:20-slim AS runner
 ARG APP_NAME
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+ENV NODE_ENV="production"
+
 WORKDIR /app
 
 # Set up a non-root user for security
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
+
+# Copy pnpm from the base image
+COPY --from=base /pnpm /pnpm
 
 # Copy the built application and its dependencies from the builder stage
 COPY --from=builder --chown=nextjs:nodejs /app/ .
