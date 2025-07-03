@@ -36,13 +36,13 @@ RUN pnpm setup
 RUN pnpm install -g turbo
 RUN pnpm turbo build --filter=api
 
-FROM base AS runner
-WORKDIR /app
+# FROM base AS runner
+# WORKDIR /app
 
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 nextjs
-# USER nextjs
+# # RUN addgroup --system --gid 1001 nodejs
+# # RUN adduser --system --uid 1001 nextjs
+# # USER nextjs
 
-COPY --from=installer /app/ .
+# COPY --from=installer /app/ .
 
 CMD ["turbo", "run", "start", "--filter=api"]
