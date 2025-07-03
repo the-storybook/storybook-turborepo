@@ -8,6 +8,15 @@ services:
     env_file:
       - .env
 
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "3001:3000"
+    env_file:
+      - .env
+
   redis:
     image: redis:latest
     ports:
@@ -15,7 +24,7 @@ services:
     volumes:
       - redis_data:/data
 
-  mondodb:
+  mongodb:
     image: mongo:latest
     ports:
       - "27017:27017"
