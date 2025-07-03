@@ -4,36 +4,20 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV="production"
 ENV SHELL="/bin/bash"
-FROM base AS builder
+
 WORKDIR /app
 
 RUN npm i -g pnpm@latest
 RUN pnpm setup
 RUN pnpm install -g turbo
 
-COPY . .
-RUN turbo prune api --docker
-# Copy root package.json and lockfile
-COPY package.json ./
-COPY pnpm-lock.yaml ./
 
+# COPY --from=builder /app/out/full/ .
+# COPY turbo.json turbo.json
 
-FROM base AS installer
-WORKDIR /app
-COPY .gitignore .gitignore
-COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-RUN npm i -g pnpm@latest
-RUN pnpm setup
-RUN pnpm install
-
-
-COPY --from=builder /app/out/full/ .
-COPY turbo.json turbo.json
-
-RUN npm i -g pnpm@latest
-RUN pnpm setup
-RUN pnpm install -g turbo
+# RUN npm i -g pnpm@latest
+# RUN pnpm setup
+# RUN pnpm install -g turbo
 RUN pnpm turbo build --filter=api
 
 # FROM base AS runner
