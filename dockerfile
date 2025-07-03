@@ -45,4 +45,4 @@ WORKDIR /app
 
 COPY --from=installer /app/ .
 
-CMD [ "npx", "tsx", "/app/apps/api/src/main.ts" ]
+CMD ["turbo", "run", "start", "--filter=api"]

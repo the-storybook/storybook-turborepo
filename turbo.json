@@ -19,6 +19,10 @@
     },
     "lint": {},
     "test": {},
-    "test:e2e": {}
+    "test:e2e": {},
+    "start": {
+      "cache": true,
+      "persistent": true
+    }
   }
 }
