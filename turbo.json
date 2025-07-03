@@ -3,6 +3,16 @@
   "globalDependencies": [
     "**/.env.*local"
   ],
+  "globalEnv": [
+    "MONGODB_URL",
+    "REDIS_HOST",
+    "REDIS_PORT",
+    "JWT_SECRET",
+    "MAIL_USER",
+    "MAIL_PASS",
+    "JWT_EXPIRATION_TIME",
+    "OTP_EXPIRATION"
+  ],
   "tasks": {
     "dev": {
       "cache": false,
