@@ -18,6 +18,8 @@ RUN pnpm install -g turbo
 # RUN npm i -g pnpm@latest
 # RUN pnpm setup
 # RUN pnpm install -g turbo
+COPY . .
+RUN pnpm install
 RUN pnpm turbo build --filter=api
 
 # FROM base AS runner
