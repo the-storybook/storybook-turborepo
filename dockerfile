@@ -60,8 +60,6 @@ RUN pnpm turbo build --filter=${APP_NAME}
 FROM node:20-slim AS runner
 ARG APP_NAME
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV="production"
 
 WORKDIR /app
@@ -71,11 +69,12 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-# Copy pnpm from the base image
-COPY --from=base /pnpm /pnpm
-
 # Copy the built application and its dependencies from the builder stage
 COPY --from=builder --chown=nextjs:nodejs /app/ .
 
 # Set the command to start the application
-CMD ["pnpm", "start", "--filter=${APP_NAME}"]
+CMD if [ "$APP_NAME" = "api" ]; then \
+      node apps/api/dist/main; \
+    else \
+      next start apps/web; \
+    fi
