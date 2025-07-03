@@ -27,14 +27,8 @@ COPY .npmrc ./
 FROM base AS pruner
 ARG APP_NAME
 
-# Copy package.json for all workspaces
-COPY apps/api/package.json ./apps/api/package.json
-COPY apps/web/package.json ./apps/web/package.json
-COPY packages/api/package.json ./packages/api/package.json
-COPY packages/eslint-config/package.json ./packages/eslint-config/package.json
-COPY packages/jest-config/package.json ./packages/jest-config/package.json
-COPY packages/typescript-config/package.json ./packages/typescript-config/package.json
-COPY packages/ui/package.json ./packages/ui/package.json
+# Copy the entire monorepo source code
+COPY . .
 
 # Generate a pruned monorepo
 RUN turbo prune --scope=${APP_NAME} --docker
